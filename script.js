@@ -1,33 +1,52 @@
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+(function () {
+  'use strict';
 
-// Theme toggle (remembers choice)
-const root = document.documentElement;
-try {
-  const saved = localStorage.getItem('theme');
-  if (saved) root.dataset.theme = saved;
-  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme = 'dark';
-} catch (e) {}
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = next;
-  try { localStorage.setItem('theme', next); } catch (e) {}
-});
+  // Theme toggle (remembers the choice, falls back to the system preference)
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('theme');
 
-// Mobile menu
-const menu = document.getElementById('menu');
-const btn = document.querySelector('.menu-btn');
-btn.addEventListener('click', () => {
-  const open = menu.classList.toggle('open');
-  btn.setAttribute('aria-expanded', open);
-});
-menu.addEventListener('click', e => {
-  if (e.target.tagName === 'A') { menu.classList.remove('open'); btn.setAttribute('aria-expanded', false); }
-});
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+  } catch (e) {}
 
-// Reveal on scroll
-const io = new IntersectionObserver(entries => {
-  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  themeBtn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) {
+      current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // Copy buttons for email and phone
+  document.querySelectorAll('.copy').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var target = document.getElementById(button.dataset.copy);
+      var text = target.textContent.trim();
+
+      function flash(label) {
+        button.textContent = label;
+        setTimeout(function () { button.textContent = 'Copy'; }, 1500);
+      }
+
+      // Fallback: select the text so the visitor can copy it manually
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(target);
+        var selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        flash('Selected');
+      }
+
+      try {
+        navigator.clipboard.writeText(text).then(function () { flash('Copied'); }, fallback);
+      } catch (e) {
+        fallback();
+      }
+    });
+  });
+})();
 
