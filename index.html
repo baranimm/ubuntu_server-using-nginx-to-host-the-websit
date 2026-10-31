@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Your Name">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#top">YN.</a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav id="menu">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle theme">◐</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Hello, I'm</p>
+      <h1>Your Name</h1>
+      <p class="tagline">I design and build clean, fast things for the web.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects">See my work</a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about" class="section reveal">
+      <h2>About</h2>
+      <p>Write a short paragraph about yourself here: what you do, what you enjoy working on, and what you're looking for. Keep it friendly and specific.</p>
+    </section>
+
+    <section id="projects" class="section reveal">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Project One</h3>
+          <p>A one or two line description of what this project does and the problem it solves.</p>
+          <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          <a href="#">View project →</a>
+        </article>
+        <article class="card">
+          <h3>Project Two</h3>
+          <p>Another project. Mention your role and the result you achieved.</p>
+          <ul class="tags"><li>Python</li><li>API</li></ul>
+          <a href="#">View project →</a>
+        </article>
+        <article class="card">
+          <h3>Project Three</h3>
+          <p>Something you're proud of. Link to a live demo or source code.</p>
+          <ul class="tags"><li>React</li><li>Node.js</li></ul>
+          <a href="#">View project →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal">
+      <h2>Skills</h2>
+      <ul class="tags big">
+        <li>JavaScript</li><li>HTML &amp; CSS</li><li>Python</li><li>Git</li>
+        <li>Linux</li><li>UI Design</li><li>SQL</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="section reveal">
+      <h2>Contact</h2>
+      <p>Want to work together or just say hi? Email me at
+        <a href="mailto:you@example.com">you@example.com</a>.</p>
+      <p class="links">
+        <a href="https://github.com/yourname">GitHub</a>
+        <a href="https://linkedin.com/in/yourname">LinkedIn</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Your Name</footer>
+  <script src="script.js"></script>
+</body>
+</html>
+
